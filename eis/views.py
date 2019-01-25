@@ -5,6 +5,4 @@ from .serializers import SalesPvsrCymSerializer
 
 class SalesPvsrCymViewSet(viewsets.ModelViewSet):
     queryset = SalesPvsrCym.objects.all()
-
-
-serializer_class = SalesPvsrCymSerializer
+    serializer_class = SalesPvsrCymSerializer

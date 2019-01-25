@@ -66,8 +66,8 @@ class SalesPvsrCy(models.Model):
 
 class SalesPvsrCym(models.Model):
     sabu = models.CharField(primary_key=True, max_length=1)
-    saupj = models.CharField(max_length=6)
-    yymm = models.CharField(max_length=6)
+    saupj = models.CharField(primary_key=True, max_length=6)
+    yymm = models.CharField(primary_key=True, max_length=6)
     planqty = models.BigIntegerField(blank=True, null=True)
     planamt = models.BigIntegerField(blank=True, null=True)
     rsltqty = models.BigIntegerField(blank=True, null=True)
