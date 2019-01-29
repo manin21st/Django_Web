@@ -1,9 +1,14 @@
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
 from .models import SalesPvsrCym
 from .serializers import SalesPvsrCymSerializer
+
+
+def login(request):
+    return render(request, 'main/login.html', {})
 
 
 class SalesPvsrCymViewSet(viewsets.ModelViewSet):

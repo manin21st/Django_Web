@@ -11,6 +11,7 @@ def comment_list(request):
         queryset = Comment.objects.all()
         serializer = CommentSerializer(queryset, many=True)
         return Response(serializer.data)
+
     # 댓글 생성
     elif request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
@@ -25,10 +26,12 @@ def comment_detail(request, pk):
         comment = Comment.objects.get(pk=pk)
     except Comment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
     # 특정 댓글 조회
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
+
     # 특정 댓글 수정
     elif request.method == 'PUT':
         serializer = CommentSerializer(comment, data=request.data)
@@ -36,6 +39,7 @@ def comment_detail(request, pk):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     # 특정 댓글 삭제
     elif request.method == 'DELETE':
         comment.delete()

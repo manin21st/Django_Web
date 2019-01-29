@@ -9,7 +9,7 @@ from .serializers import PostSerializer
 class PostList(APIView):
     """
     게시물 생성
-    /post/
+    /blog/
     """
     def post(self, request, format=None):
         serializer = PostSerializer(data=request.data)
@@ -20,7 +20,7 @@ class PostList(APIView):
 
     """
     게시물 조회
-    /post/
+    /blog/
     """
     def get(self, request, format=None):
         queryset = Post.objects.all()
@@ -37,7 +37,7 @@ class PostDetail(APIView):
 
     """
     특정 게시물 조회
-    /post/{pk}/
+    /blog/{pk}/
     """
     def get(self, request, pk):
         post = self.get_object(pk)
@@ -46,7 +46,7 @@ class PostDetail(APIView):
 
     """
     특정 게시물 수정
-    /post/{pk}/
+    /blog/{pk}/
     """
     def put(self, request, pk, format=None):
         post = self.get_object(pk)
@@ -58,7 +58,7 @@ class PostDetail(APIView):
 
     """
     특정 게시물 삭제
-    /post/{pk}/
+    /blog/{pk}/
     """
     def delete(self, request, pk, format=None):
         post = self.get_object(pk)
