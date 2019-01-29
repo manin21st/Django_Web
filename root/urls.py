@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^eis/', include('eis.urls')),
+    url(r'^comment/', include('comment.urls')),
 ]
