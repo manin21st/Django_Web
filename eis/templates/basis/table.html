@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  <style>
+    div.container {
+      width: 80%;
+    }
+  </style>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#example').DataTable({
+        "info":     false,
+        "paging":   false,
+        "ordering": false,
+        "searching": false,
+        "contentType": "application/json; charset=utf-8"
+        "ajax":{
+          "url": "",
+          "dataSrc": ""
+        },
+        "columns": [
+            { data: 'name' },
+            { data: 'position' },
+            { data: 'salary' },
+            { data: 'office' }
+        ]
+      });
+    });
+
+    <!--
+    $('#example').DataTable({
+      data: data,
+      columns: [
+          { data: 'name' },
+          { data: 'position' },
+          { data: 'salary' },
+          { data: 'office' }
+      ]
+    });
+    -->
+  </script>
+{% endblock %}

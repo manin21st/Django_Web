@@ -1,0 +1,37 @@
+{% extends './base.html' %}
+
+{% block javascript %}
+  <script>
+    //function DrawChart2D('myChart', 'line', 'The Score', ["A","B","C"], [50,65,70])
+    function DrawChart2D(sId, sType, sTitle, aLabel, aData)
+    {
+      var ctx = document.getElementById(sId).getContext('2d');
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create eg. line, bar, etc
+        type: sType,
+
+        // The data for our dataset
+        data: {
+          labels: aLabel,
+          datasets: [{
+              label: sTitle,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: aData,
+          }]
+        },
+
+        // Configuration options go here
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                 beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+     }
+  </script>
+{% endblock %}

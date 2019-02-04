@@ -1,0 +1,38 @@
+{% extends './index.html' %}
+
+{% block title %}SB Admin 2 - Blank{% endblock %}
+
+<!-- Sidebar -->
+{% block nav-item3 %}
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Login Screens:</h6>
+            <a class="collapse-item" href="{% url 'login' %}">Login</a>
+            <a class="collapse-item" href="{% url 'register' %}">Register</a>
+            <a class="collapse-item" href="{% url 'forgot-password' %}">Forgot Password</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="{% url '404' %}">404 Page</a>
+            <a class="collapse-item" href="{% url 'blank' %}">Blank Page</a>
+          </div>
+        </div>
+      </li>
+{% endblock %}
+<!-- End of Sidebar -->
+
+{% block page-content %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+{% endblock %}

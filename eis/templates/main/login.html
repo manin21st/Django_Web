@@ -9,32 +9,12 @@
     <title>Signin Template · Bootstrap</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/eis.css' %}">
-    <style>
-      body{
-		background:rgba(0, 0, 0, 0.76);
-        }
-      .login form{
-          position: relative;
-          display: -ms-flexbox;
-          display: flex;
-          padding: 1rem;
-          -ms-flex-direction: column;
-          flex-direction: column;
-          width: 100%;
-          pointer-events: auto;
-          background-color: #fff;
-          background-clip: padding-box;
-          border: 1px solid rgba(0,0,0,.2);
-          border-radius: 1.1rem;
-          outline: 0;
-          max-width: 500px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
   </head>
   <body>
     <div id="login" class="login form">
       <h3 class="text-center text-white pt-5">경영정보시스템(EIS)</h3>
+      <p></p>
       <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
           <div id="login-column" class="col-md-6">
@@ -54,7 +34,8 @@
                     <span>Remember me</span>
                     <span><input id="remember-me" name="remember-me" type="checkbox"></span>
                   </label><br>
-                  <input type="submit" name="submit" class="btn btn-info btn-lg btn-block" value="submit">
+                  <!--<input type="submit" name="submit" class="btn btn-info btn-lg btn-block" value="submit">-->
+                  <a class="btn btn-info btn-lg btn-block" href="{% url 'dashboard' %}" role="button">확 인</a>
                 </div>
 
                 <!--

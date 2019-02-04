@@ -7,8 +7,22 @@ from .models import SalesPvsrCym
 from .serializers import SalesPvsrCymSerializer
 
 
+##############################################################
 def login(request):
     return render(request, 'main/login.html', {})
+
+def chart(request):
+    return render(request, 'main/chart.html', {})
+
+def chart_test(request):
+    return render(request, 'test/chart_test1.html', {})
+
+def grid_test(request):
+    return render(request, 'test/grid_test1.html', {})
+
+def dashboard(request):
+    return render(request, 'board/dashboard.html', {})
+##############################################################
 
 
 class SalesPvsrCymViewSet(viewsets.ModelViewSet):
