@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/demo/basic-ajax-demo.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <h3>TODO:</h3>
+            <ul>
+                <li>Take out trash</li>
+            </ul>
+            <button class='btn get-more'>Get More Todos</button>
+        </div>
+        <div id="result">
+
+        </div>
+        <div class="container">
+            <h3>Add Todo</h3>
+            {% csrf_token %}
+            <div>
+                <label for="todo"></label>
+                <input class="todo-item" type="text" placeholder="Todo Item">
+                <button class="btn add-todo">Add Todo</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

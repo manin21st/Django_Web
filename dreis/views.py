@@ -1,5 +1,8 @@
+import json
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
+#---------------------------------------------------------
 # Create your views here.
 def e404(request):
     return render(request, '404.html', {})
@@ -42,3 +45,9 @@ def utilities_animation(request):
 
 def utilities_other(request):
     return render(request, 'utilities-other.html', {})
+
+
+#---------------------------------------------------------
+# Categories Collapse Menu
+def sales_plan_vs_result(request):
+    return render(request, 'sales/sales_plan_vs_result.html', {})

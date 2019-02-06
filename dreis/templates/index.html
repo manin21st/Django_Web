@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load static %}
 <html>
 
 <head>
@@ -31,10 +30,10 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-chart-bar"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</div>
+        <div class="sidebar-brand-text mx-3">EIS System</div>
       </a>
 
       <!-- Divider -->
@@ -138,6 +137,32 @@
           <span>Tables</span></a>
       </li>
 {% endblock %}
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Program Menu
+      </div>
+
+{% block nav-item6 %}
+      <!-- Nav Item - Categories Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories">
+          <i class="fas fa-fw fa-chart-line"></i>
+          <span>영업 정보</span>
+        </a>
+        <div id="collapseCategories" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="{% url 'sales_plan_vs_result' %}">년간 판매계획 대비 실적</a>
+            <a class="collapse-item" href="#">품목별 매출 점유율</a>
+          </div>
+        </div>
+      </li>
+{% endblock %}
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

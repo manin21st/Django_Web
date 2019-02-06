@@ -29,8 +29,8 @@ class SalesPvsrCymViewSet(viewsets.ModelViewSet):
     queryset = SalesPvsrCym.objects.all()
     serializer_class = SalesPvsrCymSerializer
 
-    # HTTP GET /eis/SalesPvsrCym/
-    # HTTP GET /eis/SalesPvsrCym/?search=
+    # HTTP GET /eis/data/SalesPvsrCym/
+    # HTTP GET /eis/data/SalesPvsrCym/?search=
     def get_queryset(self):
         qs = super().get_queryset()
 
@@ -40,14 +40,14 @@ class SalesPvsrCymViewSet(viewsets.ModelViewSet):
 
         return qs
 
-    # HTTP GET /eis/SalesPvsrCym/get_django/
+    # HTTP GET /eis/data/SalesPvsrCym/get_django/
     @list_route()
     def get_django(self, request):
         qs = self.get_queryset().filter(yymm__icontains='2018')
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
 
-    # HTTP PATCH /eis/SalesPvsrCym/{pk}/set_modified
+    # HTTP PATCH /eis/data/SalesPvsrCym/{pk}/set_modified
     @detail_route(methods=['patch'])
     def set_modified(self, request, pk):
         instance = self.get_object()

@@ -1,5 +1,7 @@
 from django.conf.urls import include, url
+from django.views.generic import TemplateView
 from . import views
+from . import ajax
 
 urlpatterns = [
     url(r'^$', views.login),
@@ -17,4 +19,12 @@ urlpatterns = [
     url('utilities-border/', views.utilities_border, name='utilities-border'),
     url('utilities-animation/', views.utilities_animation, name='utilities-animation'),
     url('utilities-other/', views.utilities_other, name='utilities-other'),
+
+    # Categories Collapse Menu
+    url('sales_plan_vs_result/', views.sales_plan_vs_result, name='sales_plan_vs_result'),
+
+    # Basic Ajax Demo
+    url(r'^ajax/$', TemplateView.as_view(template_name='demo/basic-ajax-demo.html')),
+    url(r'^ajax/add/$', ajax.add_todo),
+    url(r'^ajax/more/$', ajax.more_todo),
 ]

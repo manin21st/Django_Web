@@ -6,10 +6,10 @@ router = DefaultRouter()
 router.register('SalesPvsrCym', views.SalesPvsrCymViewSet)
 
 urlpatterns = [
-    #url('', include(router.urls)),
     url(r'^$', views.login),
-    url('dashboard/', views.dashboard, name='dashboard'),
-    url('chart/', views.chart, name='chart'),
-    url('chart_test/', views.chart_test),
-    url('grid_test/', views.grid_test),
+    url(r'^data/', include(router.urls)),
+    url(r'^dashboard/', views.dashboard, name='dashboard'),
+    url(r'^chart/', views.chart, name='chart'),
+    url(r'^chart_test/', views.chart_test),
+    url(r'^grid_test/', views.grid_test),
 ]
