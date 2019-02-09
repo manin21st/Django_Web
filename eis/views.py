@@ -26,7 +26,7 @@ def dashboard(request):
 
 
 class SalesPvsrCymViewSet(viewsets.ModelViewSet):
-    queryset = SalesPvsrCym.objects.all()
+    queryset = SalesPvsrCym.objects.all().order_by('yymm');
     serializer_class = SalesPvsrCymSerializer
 
     # HTTP GET /eis/data/SalesPvsrCym/

@@ -16,11 +16,11 @@ $(document).ready(function() {
             dataType: "JSON",
             success: function(data) {
                 //alert("a");
-                //var data = JSON.parse(obj);
-                //var data = JSON.stringify(obj);
+                //var data = JSON.parse(data);
+                //var data = JSON.stringify(data);
                 //alert("b");
+
                 $.each(data, function(i, item) {
-                    //alert(i);
                     $("#result").append(i + "번 " + item.yymm + " " + item.planamt + " " + item.rsltamt + " " + "<br>");
                 });
             },
