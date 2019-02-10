@@ -1,13 +1,19 @@
+// Global variables
+FWK = {};
+// FWK.colors = ["#4E73DF", "#2F4A8E", "#337299", "#329588", "#1CC88A", "#B3E4E6", "#E3E3AB", "#98A437", "#B48A3C", "#C15F44", "#BF4040", "#9F47C2"];
+FWK.colors = ["#4E73DF", "#9F47C2", "#2F4A8E", "#BF4040", "#337299", "#C15F44", "#329588", "#B48A3C", "#1CC88A", "#98A437", "#B3E4E6", "#E3E3AB"];
+
+// Program Start
 $(document).ready(function() {
 
   // Event Handler
   //$('#btnSearch').click(function(){
-  $('#btnSearch').on('click', function(){
+  $('#btnSearch').on('click', function() {
     // alert($("#txtSearch").val());
     fnSearch();
   });
   //$('#btnSearch').click(fnSearch());
-  $('#txtSearch').on('change', function(){
+  $('#txtSearch').on('change', function() {
     //alert('btnSearch');
     // alert($("#txtSearch").val());
   });
@@ -17,37 +23,37 @@ $(document).ready(function() {
 
 // CSRF code (using jQuery): Security Module
 function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = jQuery.trim(cookies[i]);
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
-    return cookieValue;
+  }
+  return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  // these HTTP methods do not require CSRF protection
+  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
+  beforeSend: function(xhr, settings) {
+    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
     }
+  }
 });
 
 // input객체의 입력값 가져오기
 function getItem(id) {
-  return $('#'+id).val();
+  return $('#' + id).val();
 }
 // 객체를 Chart에서 사용할 Array로 변환해서 리턴
 function toArray(obj, name) {
@@ -64,21 +70,21 @@ function dataSearch(url, terms) {
   var ds;
 
   $.ajax({
-      url: url,
-      type: "GET",
-      data: terms,
-      async: false,
-      dataType: "JSON",
-      success: function(data) {
-        // alert("Success: "+url);
-        ds = data;
-      },
-      error: function() {
-        alert("[dataSearch] Error is occured: "+url);
-      },
-      complete: function() {
-          //alert("Completed!");
-      }
+    url: url,
+    type: "GET",
+    data: terms,
+    async: false,
+    dataType: "JSON",
+    success: function(data) {
+      // alert("Success: "+url);
+      ds = data;
+    },
+    error: function() {
+      alert("[dataSearch] Error is occured: " + url);
+    },
+    complete: function() {
+      //alert("Completed!");
+    }
   });
   return ds;
 }
@@ -98,20 +104,22 @@ function toDataSet(obj, columns) {
   return ds;
 }
 // 객체를 DataTable에서 사용할 ColumnSet으로 변환해서 리턴
-function LoadDataTable(id, dataset, names) {
+function LoadDataTable(id, tableset, names) {
   var title = [];
 
   for (var i = 0; i < names.length; i++) {
-    title[i] = { title: names[i] };
+    title[i] = {
+      title: names[i]
+    };
   }
 
-  $("#"+id).DataTable({
-    "info":     false,
-    "paging":   false,
+  $("#" + id).DataTable({
+    "info": false,
+    "paging": false,
     "ordering": false,
     "searching": false,
     // "contentType": "application/json; charset=utf-8",
-    "data": dataset,
+    "data": tableset,
     "columns": title
   });
 }
@@ -121,6 +129,33 @@ function LoadDataTable(id, dataset, names) {
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+// Label 수만큼 Chart 색상값 가져오기
+function getColors(labels) {
+  var arr = [];
+
+  // for (var i = 0; i < labels.length; i++) {
+  for (var i in labels) {
+    arr[i] = FWK.colors[i];
+  }
+
+  return arr;
+}
+// 2개 이상 Mix된 Chart를 구현하는 경우 Dataset 구성
+function addChart(arr, data, label, type) {
+  var i = arr.length;
+
+  arr.push({
+    label: label,
+    backgroundColor: FWK.colors[i],
+    // hoverBackgroundColor: "#2e59d9",
+    // borderColor: "#4e73df",
+    data: data,
+    type: type,
+  });
+
+  return 1;
+}
+// 숫자인 경우 천단위 포맷을 지정하는 함수
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -236,122 +271,115 @@ function DrawLineChart(id, labels, data, tooltip) {
     }
   });
 }
-// // Pie Chart
-// function DrawPieChart(id, labels, data) {
-//   var ctx = document.getElementById(id);
-//   var myPieChart = new Chart(ctx, {
-//     type: 'doughnut',
-//     data: {
-//       labels: labels,
-//       datasets: [{
-//         data: data,
-//         backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-//         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-//         hoverBorderColor: "rgba(234, 236, 244, 1)",
-//       }],
-//     },
-//     options: {
-//       maintainAspectRatio: false,
-//       tooltips: {
-//         backgroundColor: "rgb(255,255,255)",
-//         bodyFontColor: "#858796",
-//         borderColor: '#dddfeb',
-//         borderWidth: 1,
-//         xPadding: 15,
-//         yPadding: 15,
-//         displayColors: false,
-//         caretPadding: 10,
-//       },
-//       legend: {
-//         display: true
-//       },
-//       cutoutPercentage: 0,
-//     },
-//   });
-// }
-//
-//
-// // Bar Chart
-// function DrawBarChart(id, labels, data, tooltip) {
-// var ctx = document.getElementById(id);
-// var myBarChart = new Chart(ctx, {
-//   type: 'bar',
-//   data: {
-//     labels: labels,
-//     datasets: [{
-//       label: tooltip,
-//       backgroundColor: "#4e73df",
-//       hoverBackgroundColor: "#2e59d9",
-//       borderColor: "#4e73df",
-//       data: data,
-//     }],
-//   },
-//   options: {
-//     maintainAspectRatio: false,
-//     layout: {
-//       padding: {
-//         left: 10,
-//         right: 25,
-//         top: 25,
-//         bottom: 0
-//       }
-//     },
-//     scales: {
-//       xAxes: [{
-//         time: {
-//           unit: 'month'
-//         },
-//         gridLines: {
-//           display: false,
-//           drawBorder: false
-//         },
-//         ticks: {
-//           maxTicksLimit: 6
-//         },
-//         maxBarThickness: 25,
-//       }],
-//       yAxes: [{
-//         ticks: {
-//           min: 0,
-//           max: 15000,
-//           maxTicksLimit: 5,
-//           padding: 10,
-//           // Include a dollar sign in the ticks
-//           callback: function(value, index, values) {
-//             return '$' + number_format(value);
-//           }
-//         },
-//         gridLines: {
-//           color: "rgb(234, 236, 244)",
-//           zeroLineColor: "rgb(234, 236, 244)",
-//           drawBorder: false,
-//           borderDash: [2],
-//           zeroLineBorderDash: [2]
-//         }
-//       }],
-//     },
-//     legend: {
-//       display: false
-//     },
-//     tooltips: {
-//       titleMarginBottom: 10,
-//       titleFontColor: '#6e707e',
-//       titleFontSize: 14,
-//       backgroundColor: "rgb(255,255,255)",
-//       bodyFontColor: "#858796",
-//       borderColor: '#dddfeb',
-//       borderWidth: 1,
-//       xPadding: 15,
-//       yPadding: 15,
-//       displayColors: false,
-//       caretPadding: 10,
-//       callbacks: {
-//         label: function(tooltipItem, chart) {
-//           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-//           return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
-//         }
-//       }
-//     },
-//   }
-// });
-//
+// Pie Chart
+function DrawPieChart(id, labels, data, colors) {
+  var ctx = document.getElementById(id);
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: colors
+        // backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+        // hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        // hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true
+      },
+      cutoutPercentage: 80,
+    },
+  });
+}
+// Bar Chart
+function DrawBarChart(id, labels, dataset) {
+  var ctx = document.getElementById(id);
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: dataset,
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'month'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 6
+          },
+          maxBarThickness: 25,
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0,
+            // max: 15000,
+            maxTicksLimit: 5,
+            padding: 10,
+            // Include a dollar sign in the ticks
+            callback: function(value, index, values) {
+              return '' + number_format(value);
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+          }
+        }
+      },
+    }
+  });
+}
