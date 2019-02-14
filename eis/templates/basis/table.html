@@ -14,34 +14,31 @@
   <script>
     $(document).ready(function(){
       $('#example').DataTable({
-        "info":     false,
-        "paging":   false,
-        "ordering": false,
-        "searching": false,
-        "contentType": "application/json; charset=utf-8"
-        "ajax":{
-          "url": "",
-          "dataSrc": ""
-        },
-        "columns": [
-            { data: 'name' },
-            { data: 'position' },
-            { data: 'salary' },
-            { data: 'office' }
-        ]
+          columns: [
+              { data: 'name' },
+              { data: 'position' },
+              { data: 'office' },
+              { data: 'age', className: 'dt-body-left' },
+              { data: 'start date' },
+              { data: 'salary' }
+          ],
+          // columnDefs: [
+          //   {
+          //       targets: 3,
+          //       className: 'dt-body-right'
+          //   }
+          // ]
       });
     });
 
-    <!--
-    $('#example').DataTable({
-      data: data,
-      columns: [
-          { data: 'name' },
-          { data: 'position' },
-          { data: 'salary' },
-          { data: 'office' }
-      ]
-    });
-    -->
+    // $('#example').DataTable({
+    //   data: data,
+    //   columns: [
+    //       { data: 'name' },
+    //       { data: 'position' },
+    //       { data: 'salary' },
+    //       { data: 'office' }
+    //   ]
+    // });
   </script>
 {% endblock %}

@@ -39,8 +39,10 @@ function fnSearch()
   //-----------------------------------------------------------
   // Loading datatable
   var names = ["기준년월", "계획수량", "계획금액", "실적수량", "실적금액"];
+  // var names = ["yymm", "planqty", "planamt", "rsltqty", "rsltamt"];
   var columns = ["yymm", "planqty", "planamt", "rsltqty", "rsltamt"];
-  var tableset = toDataSet(queryset, columns);
+  var tableset = [];
+  tableset = toTableSet(queryset, columns);
   // alert(dataset[0]);
   LoadDataTable("dataTable", tableset, names);
 }

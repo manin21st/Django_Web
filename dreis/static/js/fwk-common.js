@@ -91,36 +91,40 @@ function dataSearch(url, terms) {
 
 
 // 객체를 DataTable에서 사용할 DataSet으로 변환해서 리턴
-function toDataSet(obj, columns) {
+function toTableSet(obj, columns) {
   var ds = [];
 
   $.each(obj, function(i, item) {
     ds[i] = [];
     for (var j = 0; j < columns.length; j++) {
-      ds[i][j] = item[columns[j]];
+      ds[i][j] = number_format(item[columns[j]]);
     }
   });
 
   return ds;
 }
-// 객체를 DataTable에서 사용할 ColumnSet으로 변환해서 리턴
+// DataTable
 function LoadDataTable(id, tableset, names) {
-  var title = [];
+  var titles = [];
 
   for (var i = 0; i < names.length; i++) {
-    title[i] = {
-      title: names[i]
+    titles[i] = {
+      title: names[i],
+      className: "dt-body-right"
     };
   }
 
   $("#" + id).DataTable({
+    "destroy": true,
     "info": false,
     "paging": false,
-    "ordering": false,
+    // "ordering": false,
     "searching": false,
-    // "contentType": "application/json; charset=utf-8",
     "data": tableset,
-    "columns": title
+    "columns": titles,
+    "columnDefs": [
+        { className: "dt-head-center", targets: "_all" }
+    ],
   });
 }
 
